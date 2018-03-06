@@ -116,7 +116,7 @@ does not contain a proper triangular mesh, then an error message is returned.\n\
             int str_start = line.rfind(" ") + 1;
             if(line.find("./") != -1) {str_start = line.find("./") + 2;}
             int str_end = line.length();
-            int str_len = str_end - str_start - 1;
+            int str_len = str_end - str_start;
             mtl_filename = line.substr(str_start, str_len);
         }
         if(line[0] == 'v' && line[1] == ' ')
