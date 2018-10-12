@@ -32,12 +32,12 @@ struct Area
 };  
 
 
-DEFUN_DLD (mesh_barycenter, args, nargout, 
+DEFUN_DLD (meshBarycenter, args, nargout, 
           "-*- texinfo -*-\n\
-@deftypefn{Loadable function} COORDINATES = mesh_barycenter(@var{input_arguments})\n\
+@deftypefn{Loadable function} COORDINATES = meshBarycenter(@var{input_arguments})\n\
 \n\
 \n\
-Example: A = mesh_barycenter(Vertices, Faces)\n\
+Example: A = meshBarycenter(Vertices, Faces)\n\
 \n\
 \n\
 This function computes the 3D coordinates of the polygon barycenter of a\n\
@@ -183,6 +183,13 @@ in the first input argument\n\
   if (nargout == 1)
   {
       retval(0) = mesh_barycenter;
+  }
+  else
+  {
+      std::cout << "Mesh barycentric coordinates are: x=" << mesh_barycenter(0,0) 
+                << "  y=" << mesh_barycenter(0,1) << "  z=" << mesh_barycenter(0,2) 
+                << "\n";
+      return octave_value_list();
   }
   return retval; 
 
