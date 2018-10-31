@@ -30,7 +30,8 @@ function [varargout] = longbone_Scaling(varargin)
   % the function will scan the working directory for all .obj files and will scale
   % them iteratively in batch mode. For each file, the user will be prompted for the
   % real maximum distance of each corresponding long bone and it will subsequently
-  % scale the model to the real world dimensions with units in mm.
+  % scale the model to the real world dimensions with units in mm. Scaling is performed
+  % about the model's barycentric coordinates, which are translated to origin.
   %
   % Prior to scaling, when prompted for manual measurement value, the user may
   % examine the model's maximum distance corresponding points by opening the triangular
@@ -49,6 +50,7 @@ function [varargout] = longbone_Scaling(varargin)
   % which are also saved in @var{scale(1,[1:4])}, when output variable is declared by
   % calling the function as @var{scale} = longbone_Scaling.
   %
+  % The present function
 
   % load required packages
   pkg load statistics
