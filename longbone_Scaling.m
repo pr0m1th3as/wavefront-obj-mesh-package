@@ -50,7 +50,10 @@ function [varargout] = longbone_Scaling(varargin)
   % which are also saved in @var{scale(1,[1:4])}, when output variable is declared by
   % calling the function as @var{scale} = longbone_Scaling.
   %
-  % The present function
+  % The present function requires the 'statistics', 'geometry' and 'io' packages installed.
+  % It also relies on 'longbone_maxDistance.m', 'readObj', 'readMtl.m', 'writeObj',
+  % 'writeMtl.m', 'write_MeshlabPoints.m' and 'meshBarycenter' functions available at
+  % @url{https://github.com/pr0m1th3as/wavefront-obj-mesh-package}.
 
   % load required packages
   pkg load statistics
