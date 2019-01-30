@@ -1,4 +1,4 @@
-% Copyright (C) 2018 Andreas Bertsatos <andreas.bertsatos@gmail.com>
+% Copyright (C) 2018-2019 Andreas Bertsatos <andreas.bertsatos@gmail.com>
 %
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
@@ -31,26 +31,20 @@ function Point_coordinates = readpoints(samples,files)
   % are integers. If the point names are alphanumeric, the user must use
   % the 'read_MeshlabPoints.m' function to read the files manually.
 
-  % list the filenames of all the files in the working folder
-  filenames = ls;
+  % list the filenames with .pp extension in the working folder
+  filenames = dir("*.pp");
 
-  % remove the files that do not contain any Meshlab points
-  % only file with .pp extension are kept in th list
-  for i = length(filenames):-1:1
-    if isempty(strfind(filenames(i,:),".pp"))
-      filenames(i,:) = [];
-    endif
-  endfor
+  % Check if the number of samples and the number of associated files per sample
+  % is correct with the files present in the directory
+  if length(filenames) != samples * files
+    printf("Expected files are not appropriately listed.\n");
+    return;
+  endif
   
-
-  % Define the number of samples and the number of associated files per sample
-  % samples = 20;
-  % files = 10;
-
   % iterate over the files and store the point coorddinates in a table
   for i = 1:samples
     for j = 1:files
-      MPL = read_MeshlabPoints(strcat(filenames(((i-1)*10)+j,:)));
+      MPL = read_MeshlabPoints(strcat(filenames(((i-1)*files)+j).name));
       for k = 1:length(MPL)
         Point_number = MPL(k,1);
         Point_coordinates(i,[((Point_number-1) * 3) + 1:((Point_number-1) * 3) + 3]) = MPL(k,[2:4]);
@@ -62,5 +56,5 @@ function Point_coordinates = readpoints(samples,files)
   valid_points = length(Point_coordinates(Point_coordinates!=0))/3;
   missing_points = length(Point_coordinates(Point_coordinates==0))/3;
   printf ("%d point 3D coordinates have been identified.\n", valid_points);
-  printf ("%d point 3D coordinates are missing.\n", missing_points);
+  printf ("%d point 3D coordinates are missing.\n\n", missing_points);
 endfunction
