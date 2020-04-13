@@ -233,7 +233,7 @@ matrix provided as the third input argument\n\
   // vertices and faces respcectively, whereas the latter will either be for
   // texture coordinates and texture faces or for vertex normals and face normals.
   // This will depend on the number of coordinates present in third input argument.
-  // Te last input argument should again be a string
+  // The last input argument should again be a string
   // 
   // check for 5 input arguments with the third argument having two coordinates
   // present, namely u, v, and the last argument being a string
