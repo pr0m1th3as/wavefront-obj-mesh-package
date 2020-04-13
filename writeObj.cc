@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2018 Andreas Bertsatos <andreas.bertsatos@gmail.com>
+Copyright (C) 2018-2020 Andreas Bertsatos <abertsatos@biol.uoa.gr>
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -152,10 +152,10 @@ matrix provided as the third input argument\n\
       face.push_back(temp_face);
     }
     ////
-    ////
     //// code for creating file and storing elements goes here!!!
     //// vertices + faces
     ////
+    //// skip reference to materials file from the header
     ////
     // check if filename exists
     bool filename_exists = std::ifstream(filename.c_str()).good();
@@ -191,9 +191,6 @@ matrix provided as the third input argument\n\
       outputFile << "#\n# Object " << filename.c_str() << "\n#\n";
       outputFile << "# Vertices: " << V_rows << "\n";
       outputFile << "# Faces: " << F_rows << "\n#\n#\n\n";
-      //int i = filename.length() - 3;
-      //std::string mtlfilename = filename.c_str();
-      //outputFile << "mtllib ./" << mtlfilename.replace(i,3, "mtl") <<"\n\n";
       std::cout << "Writing to file... ";
       // write vertices to file
       for(std::vector<Coord>::iterator v_it = vertex.begin(); v_it != vertex.end(); ++v_it)
@@ -338,10 +335,10 @@ matrix provided as the third input argument\n\
       return octave_value_list();
     }
     ////
-    ////
     //// code for creating file and storing elements goes here!!!
     //// vertices + faces + texture coordinates + texture faces
     ////
+    //// append reference to materials file in the header
     ////
     // check if filename exists
     bool filename_exists = std::ifstream(filename.c_str()).good();
@@ -513,10 +510,10 @@ matrix provided as the third input argument\n\
       return octave_value_list();
     }
     ////
+    //// code for creating file and storing elements goes here!!!
+    //// vertices + faces + vertex normals + face normals
     ////
-    // code for creating file and storing elements goes here!!!
-    // vertices + faces + vertex normals + face normals
-    ////
+    //// skip reference to materials file from the header
     ////
     // check if filename exists
     bool filename_exists = std::ifstream(filename.c_str()).good();
@@ -552,9 +549,6 @@ matrix provided as the third input argument\n\
       outputFile << "#\n# Object " << filename.c_str() << "\n#\n";
       outputFile << "# Vertices: " << V_rows << "\n";
       outputFile << "# Faces: " << F_rows << "\n#\n#\n\n";
-      //int i = filename.length() - 3;
-      //std::string mtlfilename = filename.c_str();
-      //outputFile << "mtllib ./" << mtlfilename.replace(i,3, "mtl") <<"\n\n";
       std::cout << "Writing to file... ";
       // write vertices to file
       for(std::vector<Coord>::iterator v_it = vertex.begin(); v_it != vertex.end(); ++v_it)
@@ -752,11 +746,11 @@ matrix provided as the third input argument\n\
       return octave_value_list();
     }
     ////
+    //// code for creating file and storing elements goes here!!!
+    //// vertices + faces + texture coordinates + texture faces
+    //// + vertex normals + face normals
     ////
-    // code for creating file and storing elements goes here!!!
-    // vertices + faces + texture coordinates + texture faces
-    // + vertex normals + face normals
-    ////
+    ////  append reference to materials file in the header
     ////
     // check if filename exists
     bool filename_exists = std::ifstream(filename.c_str()).good();
@@ -792,6 +786,7 @@ matrix provided as the third input argument\n\
       outputFile << "#\n# Object " << filename.c_str() << "\n#\n";
       outputFile << "# Vertices: " << V_rows << "\n";
       outputFile << "# Faces: " << F_rows << "\n#\n#\n";
+			// write materials reference filename
       int i = filename.length() - 3;
       std::string mtlfilename = filename.c_str();
       outputFile << "mtllib ./" << mtlfilename.replace(i,3, "mtl") <<"\n\n";
@@ -829,7 +824,6 @@ matrix provided as the third input argument\n\
       outputFile.close();
       std::cout << "done!\n";
     }
-    ////
     ////
     ////
     ////
