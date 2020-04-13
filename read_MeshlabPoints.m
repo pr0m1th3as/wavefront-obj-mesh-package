@@ -1,4 +1,4 @@
-% Copyright (C) 2018 Andreas Bertsatos <andreas.bertsatos@gmail.com>
+% Copyright (C) 2018-2020 Andreas Bertsatos <abertsatos@biol.uoa.gr>
 %
 % This program is free software; you can redistribute it and/or modify it under
 % the terms of the GNU General Public License as published by the Free Software
@@ -15,7 +15,7 @@
 %
 %
 function [varargout] = read_MeshlabPoints(filename)
-  % function [MPL, name_list] = read_MeshlabPoints(filename)
+  % function [MLP, name_list] = read_MeshlabPoints(filename)
   %
   % This function reads a .pp MeshLab Point file and returns and Nx4 matrix
   % containing the name for each point along with the corresponding x y z 
@@ -34,11 +34,11 @@ function [varargout] = read_MeshlabPoints(filename)
   %
   % Output:
   %   MLP  number of Points x 4 array in the format
-  %   MPL(1,:) = [name, x, y, z]
+  %   MLP(1,:) = [name, x, y, z]
   %
   % or
   %   MLP  number of Points x 3 array in the format
-  %   MPL(1,:) = [x, y, z]
+  %   MLP(1,:) = [x, y, z]
   %   name_list(1) = "name of first point"
   %
   %
@@ -63,7 +63,7 @@ function [varargout] = read_MeshlabPoints(filename)
       x = str2num(line(x_start:x_end));
       y = str2num(line(y_start:y_end));
       z = str2num(line(z_start:z_end));
-      if (str2num(line(name_start:name_end)))
+      if (isnumeric(str2num(line(name_start:name_end))))
         name = str2num(line(name_start:name_end));
         name_list(point_index) = str2num(line(name_start:name_end));
       else
@@ -83,4 +83,3 @@ function [varargout] = read_MeshlabPoints(filename)
     varargout{2} = name_list;
   endif
 endfunction
-
